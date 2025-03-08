@@ -1,0 +1,18 @@
+{
+   "name": "phone-mask-native",
+   "description": "The plugin activates the mask when entering phone numbers. Belarusian and Russian numbers are supported, the rest are introduced without a mask.",
+   "version": "1.0.0",
+   "homepage": "https://github.com/GreyAdmiral",
+   "repository": "git://github.com/GreyAdmiral/phone-mask-native.git",
+   "author": "Binarion (https://greyadmiral.github.io/)",
+   "main": "./index.js",
+   "keywords": [
+      "plugin",
+      "form",
+      "input",
+      "phone mask",
+      "phone number",
+      "phone-mask-native"
+   ],
+   "license": "MIT"
+}
