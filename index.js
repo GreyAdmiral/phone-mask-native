@@ -1,10 +1,12 @@
 // @ts-check
 const options = require("./phonemasks.json");
-const {oneSymbols, twoSymbols, threeSymbols} = require("./phonenumbers.json");
+const phoneNumbers = require("./phonenumbers.json");
+const oneSymbols = phoneNumbers.find((it) => isOneNumbers(it));
+const otherSymbols = phoneNumbers.filter((it) => !isOneNumbers(it));
 module.exports = function (sel) {
    document.addEventListener("DOMContentLoaded", function () {
-      const selector = sel || "input[data-phone-input]",
-         phoneInputs = document.querySelectorAll(selector);
+      const selector = sel || "input[data-phone-input]";
+      const phoneInputs = document.querySelectorAll(selector);
       options["handleEvent"] = onPhoneInput;
       phoneInputs.forEach((it) => {
          it.addEventListener("keydown", onPhoneKeyDown);
@@ -17,8 +19,8 @@ function getInputNumbersValue(input) {
    return input.value.replace(/\D/g, "");
 }
 function onPhonePaste(e) {
-   const input = e.target,
-      pasted = e.clipboardData;
+   const input = e.target;
+   const pasted = e.clipboardData;
    let inputNumbersValue = getInputNumbersValue(input);
    if (pasted) {
       const pastedText = pasted.getData("Text");
@@ -44,15 +46,19 @@ function onPhoneInput(e) {
       }
       return;
    }
-   if (oneSymbols.includes(inputNumbersValue[0])) {
-      const firstSymbols = inputNumbersValue[0] == "8" ? "8" : `+${inputNumbersValue[0]}`;
+   if (oneSymbols?.numbers.includes(inputNumbersValue[0])) {
+      const firstSymbols = inputNumbersValue[0] === "8" ? "8" : `+${inputNumbersValue[0]}`;
       renderMask(firstSymbols, this.one);
-   } else if (isHasInArray(inputNumbersValue, twoSymbols)) {
-      const firstSymbols = `+${inputNumbersValue.substring(0, 2)}`;
-      renderMask(firstSymbols, this.two);
-   } else if (isHasInArray(inputNumbersValue, threeSymbols)) {
-      const firstSymbols = `+${inputNumbersValue.substring(0, 3)}`;
-      renderMask(firstSymbols, this.three);
+   } else if (isHasInArray(inputNumbersValue, getAllNunmber(otherSymbols))) {
+      for (const { numbers, scheme } of otherSymbols) {
+         if (isHasInArray(inputNumbersValue, numbers)) {
+            const [sample] = numbers;
+            const length = (sample && sample.length) || 0;
+            const firstSymbols = `+${inputNumbersValue.substring(0, length)}`;
+            renderMask(firstSymbols, options[scheme]);
+            break;
+         }
+      }
    } else {
       if (inputNumbersValue) {
          formattedInputValue = "+" + inputNumbersValue.substring(0, 16);
@@ -83,4 +89,12 @@ function onPhoneKeyDown(e) {
 }
 function isHasInArray(value, array) {
    return array.some((num) => value.startsWith(num));
+}
+function getAllNunmber(array) {
+   return array.reduce((acc, { numbers }) => [...acc, ...numbers], []);
+}
+function isOneNumbers({numbers}) {
+   const [sample] = numbers;
+   const length = (sample && sample.length) || 0;
+   return length === 1;
 }
