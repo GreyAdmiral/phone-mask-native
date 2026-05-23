@@ -14,17 +14,38 @@ const otherSymbols = phoneNumbers.filter((it) => !isOneNumbers(it));
  * @param {string} [selector='input[data-phone-input]']
  */
 export default function (selector = 'input[data-phone-input]') {
-   document.addEventListener('DOMContentLoaded', function () {
+   const init = () => {
       const phoneInputs = document.querySelectorAll(selector);
 
       options['handleEvent'] = onPhoneInput;
 
-      phoneInputs.forEach((it) => {
-         it.addEventListener('keydown', onPhoneKeyDown);
-         it.addEventListener('input', options);
-         it.addEventListener('paste', onPhonePaste);
-      });
-   });
+      for (const input of phoneInputs) {
+         const isInput = input instanceof HTMLInputElement;
+
+         if (!isInput) {
+            console.error('phoneMaskNative: Элемент быть полем ввода! Элемент: ', input);
+            continue;
+         }
+
+         const { type } = input;
+         const isValidation = type === 'tel' || type === 'text';
+
+         if (!isValidation) {
+            console.error('phoneMaskNative: Поле ввода должно иметь атрибут type со значениями tel либо text! Поле: ', input);
+            continue;
+         }
+
+         input.addEventListener('keydown', onPhoneKeyDown);
+         input.addEventListener('input', options);
+         input.addEventListener('paste', onPhonePaste);
+      }
+   };
+
+   if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+   } else {
+      init();
+   }
 }
 
 /**
@@ -33,6 +54,14 @@ export default function (selector = 'input[data-phone-input]') {
  */
 function getInputNumbersValue(input) {
    return input.value.replace(/\D/g, '');
+}
+
+function onPhoneKeyDown(e) {
+   const inputValue = e.target.value.replace(/\D/g, '');
+
+   if (e.keyCode == 8 && inputValue.length == 1) {
+      e.target.value = '';
+   }
 }
 
 /**
@@ -77,12 +106,13 @@ function onPhoneInput(e) {
       const firstSymbols = inputNumbersValue[0] === '8' ? '8' : `+${inputNumbersValue[0]}`;
 
       renderMask(firstSymbols, this.one);
-   } else if (isHasInArray(inputNumbersValue, getAllNunmber(otherSymbols))) {
+   } else if (isHasInArray(inputNumbersValue, getAllNunmbers(otherSymbols))) {
       for (const { numbers, scheme } of otherSymbols) {
          if (isHasInArray(inputNumbersValue, numbers)) {
             const [sample] = numbers;
             const length = (sample && sample.length) || 0;
             const firstSymbols = `+${inputNumbersValue.substring(0, length)}`;
+
             renderMask(firstSymbols, options[scheme]);
             break;
          }
@@ -116,14 +146,6 @@ function onPhoneInput(e) {
    }
 }
 
-function onPhoneKeyDown(e) {
-   const inputValue = e.target.value.replace(/\D/g, '');
-
-   if (e.keyCode == 8 && inputValue.length == 1) {
-      e.target.value = '';
-   }
-}
-
 /**
  * @param {string} value
  * @param {string[]} array
@@ -137,12 +159,12 @@ function isHasInArray(value, array) {
  * @param {Array<phoneNumber>} array
  * @returns {string[]}
  */
-function getAllNunmber(array) {
+function getAllNunmbers(array) {
    return array.reduce((acc, { numbers }) => [...acc, ...numbers], []);
 }
 
 /**
- * @param {phoneNumber} numbers
+ * @param {{numbers: Array<string>}} numbers
  * @returns {boolean}
  */
 function isOneNumbers({ numbers }) {
