@@ -8,6 +8,18 @@
 npm i phone-mask-native
 ```
 
+## CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.1/dist/phone-mask-native.min.js"></script>
+```
+
+or
+
+```html
+<script src="https://unpkg.com/phone-mask-native@1.1.1/dist/phone-mask-native.min.js"></script>
+```
+
 ## Import
 
 ```javascript
