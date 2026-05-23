@@ -6,6 +6,7 @@
 
 import options from './phonemasks.json';
 import phoneNumbers from './phonenumbers.json';
+
 const oneSymbols = phoneNumbers.find((it) => isOneNumbers(it));
 const otherSymbols = phoneNumbers.filter((it) => !isOneNumbers(it));
 
