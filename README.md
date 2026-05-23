@@ -4,23 +4,27 @@
 
 ## Install
 
-```shell
-npm i phone-mask-native
-```
-
-## CDN
+#### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.3/dist/phone-mask-native.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.4/dist/phone-mask-native.min.js"></script>
 ```
 
 or
 
 ```html
-<script src="https://unpkg.com/phone-mask-native@1.1.3/dist/phone-mask-native.min.js"></script>
+<script src="https://unpkg.com/phone-mask-native@1.1.4/dist/phone-mask-native.min.js"></script>
 ```
 
-## Import
+#### Import
+
+Run the command in the console
+
+```shell
+npm i phone-mask-native
+```
+
+Perform the import
 
 ```javascript
 const phoneMaskNative = require("phone-mask-native");
@@ -39,6 +43,30 @@ Default: `input[data-phone-input]`<br>
 The selector of the input fields of telephone numbers (you can also use the text input field).
 
 ## Usage
+
+#### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.4/dist/phone-mask-native.min.js"></script>
+
+...
+
+<script>
+   new phoneMaskNative();
+</script>
+```
+or
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.4/dist/phone-mask-native.min.js"></script>
+
+...
+
+<script>
+   new phoneMaskNative("your-selector");
+</script>
+```
+#### Import
 
 ```javascript
 const phoneMaskNative = require("phone-mask-native");
