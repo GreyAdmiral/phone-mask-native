@@ -1,19 +1,19 @@
 # phone-mask-native
 
-> The plugin activates the mask when entering telephone numbers. Most countries with mobile communications are supported, the numbers of countries that are not supported will be represented without a mask.
+> The plugin activates the mask when entering phone numbers. Most countries with mobile communications are supported, including Belarus, Russia, Ukraine, Poland, Czech Republic, etc. Numbers of countries that are not supported will be indicated without a mask.
 
 ## Install
 
 #### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.6/dist/phone-mask-native.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.7/dist/phone-mask-native.min.js"></script>
 ```
 
 or
 
 ```html
-<script src="https://unpkg.com/phone-mask-native@1.1.6/dist/phone-mask-native.min.js"></script>
+<script src="https://unpkg.com/phone-mask-native@1.1.7/dist/phone-mask-native.min.js"></script>
 ```
 
 #### Import
@@ -48,7 +48,7 @@ The selector of the input fields of telephone numbers (you can also use the text
 #### CDN
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.6/dist/phone-mask-native.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.7/dist/phone-mask-native.min.js"></script>
 
 ...
 
@@ -60,7 +60,7 @@ The selector of the input fields of telephone numbers (you can also use the text
 or
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.6/dist/phone-mask-native.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/phone-mask-native@1.1.7/dist/phone-mask-native.min.js"></script>
 
 ...
 
