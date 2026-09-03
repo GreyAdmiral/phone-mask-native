@@ -1,6 +1,4 @@
-/** @typedef {Record<'from' | 'to', string>} FromTo */
-
-/** @typedef {Record<'fb' | 'sb' | 'fn' | 'sn', FromTo>} PhoneMaskScheme */
+/** @typedef {Record<'fb' | 'sb' | 'fn' | 'sn', Record<'from' | 'to', string>>} PhoneMaskScheme */
 
 /**
  * @typedef {Object} PhoneNumber

@@ -1,13 +1,3 @@
-/** @typedef {Record<'from' | 'to', string>} FromTo */
-
-/** @typedef {Record<'fb' | 'sb' | 'fn' | 'sn', FromTo>} PhoneMaskScheme */
-
-/**
- * @typedef {Object} PhoneNumber
- * @prop {string[]} numbers
- * @prop {'one' | 'two' | 'three'} scheme
- */
-
 import options from './data/phonemasks.json';
 import { getAllNunmbers, getInputNumbersValue, isHasInArray, maskCalculation, oneSymbols, otherSymbols } from './helpers.js';
 

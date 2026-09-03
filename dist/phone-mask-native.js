@@ -278,7 +278,7 @@ var phoneNumbers = [
 	}
 ];
 
-/** @typedef {Record<'from' | 'to', string>} FromTo */
+/** @typedef {Record<'fb' | 'sb' | 'fn' | 'sn', Record<'from' | 'to', string>>} PhoneMaskScheme */
 
 
 const oneSymbols = phoneNumbers.find((it) => isOneNumbers(it));
@@ -345,9 +345,6 @@ function maskCalculation({ firstSymbols, inputNumbersValue, options }) {
 
    return formattedInputValue;
 }
-
-/** @typedef {Record<'from' | 'to', string>} FromTo */
-
 
 /**
  * @param {KeyboardEvent} e
@@ -425,9 +422,6 @@ function onPhoneInput(e) {
 
    input.value = formattedInputValue;
 }
-
-/** @typedef {Record<'from' | 'to', string>} FromTo */
-
 
 const supportedInputs = ['tel', 'text'];
 
